@@ -34,7 +34,7 @@ export default function StorySlides({
           variant="shadow"
           // size="sm"
           radius="sm"
-          className="h-6 p-0 px-2 text-xs font-bold md:p-4 md:px-0 md:text-sm "
+          className="h-6 p-0 px-2 text-xs font-bold md:p-4 md:px-4 md:text-sm "
           as={Link}
           href={`/stories/texts/${storyID}#personal-note`}
         >
