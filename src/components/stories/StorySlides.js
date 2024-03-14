@@ -17,7 +17,7 @@ export default function StorySlides({
 }) {
   return (
     <>
-      <div className="px-0 md:h-full md:px-20">
+      <div className="flex flex-row gap-6 px-0 md:h-full md:px-20">
         <Button
           color="default"
           variant="shadow"
@@ -28,6 +28,17 @@ export default function StorySlides({
           href={`/stories/texts/${storyID}`}
         >
           Text Mode
+        </Button>
+        <Button
+          color="default"
+          variant="shadow"
+          // size="sm"
+          radius="sm"
+          className="h-6 p-0 px-2 text-xs font-bold md:p-4 md:px-0 md:text-sm "
+          as={Link}
+          href={`/stories/texts/${storyID}#personal-note`}
+        >
+          Personal Notes
         </Button>
       </div>
       <Swiper

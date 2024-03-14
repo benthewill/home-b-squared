@@ -18,6 +18,7 @@ export default function StoryTextContent({
   storyDraft,
   dateCreated,
   storyID,
+  storyNote,
 }) {
   const [inView, setInview] = useState(false);
 
@@ -37,6 +38,8 @@ export default function StoryTextContent({
     },
   });
 
+  const noteArray = storyNote.split("\n");
+
   return (
     <Waypoint onEnter={() => setInview(true)}>
       <div className="flex flex-col">
@@ -54,16 +57,26 @@ export default function StoryTextContent({
               <p className="text-medium text-right font-thin">Premise</p>
             </CardFooter>
           </Card>
-          <div className="mt-10">
+          <div className="mt-10 flex flex-row gap-6">
             <Button
               color="warning"
               variant="shadow"
               radius="sm"
-              className="md:text-medium h-6 p-0 px-4 text-xs font-bold text-zinc-900 md:p-4 md:px-4"
+              className="md:text-medium h-8 p-0 px-4 text-xs font-bold text-zinc-900 md:p-4 md:px-4"
               as={Link}
               href={`/stories/slides/${storyID}`}
             >
               Presentation Mode
+            </Button>
+            <Button
+              color="default"
+              variant="shadow"
+              radius="sm"
+              className="md:text-medium h-8 p-0 px-4 text-xs font-bold text-zinc-900 md:p-4 md:px-4"
+              as={Link}
+              href={`#personal-note`}
+            >
+              Personal Notes
             </Button>
           </div>
         </animated.div>
@@ -73,6 +86,21 @@ export default function StoryTextContent({
           className="mt-2 flex w-full flex-col pl-0 md:w-3/4 md:pl-4"
         >
           {parsedContent.map((line, index) => {
+            return (
+              <div key={index}>
+                <p className="text-lg font-light tracking-wide md:text-xl">
+                  {line}
+                </p>
+                <Spacer y={6} />
+              </div>
+            );
+          })}
+          <div className="my-6 w-3/4 pl-0 md:pl-0" id="personal-note">
+            <p className="text-2xl font-extrabold tracking-wide text-zinc-100 md:text-5xl">
+              Personal Note
+            </p>
+          </div>
+          {noteArray.map((line, index) => {
             return (
               <div key={index}>
                 <p className="text-lg font-light tracking-wide md:text-xl">

@@ -30,7 +30,7 @@ export default async function Page({ params }) {
   let { data: stories_presentation_points, error } = await supabase
     .from("stories_presentation_points")
     .select(
-      "line_number, indent_level, content, stories_titles(created_at, title, premise, genres, misc, latest_draft, type, stage)",
+      "line_number, indent_level, content, stories_titles(created_at, title, premise, genres, misc, latest_draft, type, stage, note)",
     )
     // Filters
     .eq("story_id", params.text);
@@ -43,6 +43,7 @@ export default async function Page({ params }) {
   const storyDraft = storyMetadata.latest_draft;
   const storyType = storyMetadata.type;
   const storyStage = storyMetadata.stage;
+  const storyNote = storyMetadata.note;
   const storyDate = String(storyMetadata.created_at).substr(0, 9);
 
   const unparsedContent = stories_presentation_points;
@@ -73,6 +74,7 @@ export default async function Page({ params }) {
         storyDraft={storyDraft}
         dateCreated={storyDate}
         storyID={params.text}
+        storyNote={storyNote}
       />
     </div>
   );
