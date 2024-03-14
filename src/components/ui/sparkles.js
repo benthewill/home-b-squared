@@ -31,7 +31,6 @@ export const SparklesCore = (props) => {
 
     const particlesLoaded = async (container) => {
         if (container) {
-            console.log(container);
             controls.start({
                 opacity: 1,
                 transition: {
@@ -104,7 +103,7 @@ export const SparklesCore = (props) => {
                                     },
                                 },
                                 enable: false,
-                                maxSpeed: 50,
+                                maxSpeed: 20,
                                 mode: "bounce",
                                 overlap: {
                                     enable: true,

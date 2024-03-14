@@ -30,8 +30,8 @@ const innerMaterial = new THREE.MeshStandardMaterial({
 })
 
 const path = 'https://sinkbpkdxfjiqjiofwzr.supabase.co/storage/v1/object/public/gltfs/balloons_low.glb'
-const mainPathLocal = '/balloons_low.glb'
-const pinchedPathLocal = '/balloons_pinched_low.glb'
+const mainPathLocal = 'models/balloons_low.glb'
+const pinchedPathLocal = 'models/balloons_pinched_low.glb'
 
 export default function Scene(props) {
     const { nodes, materials } = useGLTF(mainPathLocal)
