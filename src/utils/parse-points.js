@@ -8,6 +8,7 @@ export function parseForTexts(unparsed) {
     let num = line.line_number;
     let indent = line.indent_level;
     let content = String(line.content);
+    // console.log(content)
 
     if (num == 0) {
       contentRowsArr[0] += content;
