@@ -1,24 +1,32 @@
-// "use client";
-// import { cn } from "@/utils/cn";
+// "use server";
+
+export const dynamic = "force-dynamic"; // not sure if required
+export const runtime = "edge"; // not sure if required
+
 import StoryCard from "@/components/stories/StoryCard";
-import { createClient } from "@/utils/client";
+import { createClient } from "@/utils/server";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 
-export const metadata = {
-  title: "Ben's Stories",
-  description: "Portfolio for Ben's stories",
-};
+export async function generateMetadata({ params }) {
+  return {
+    title: "Ben's Stories",
+    description: "Portfolio for Ben's stories",
+  };
+}
 
 export default async function Stories() {
-  const supabase = createClient();
   const storiesIntro =
     "Oh, are you lost on your journey? No matter; today’s lost are conquerors tomorrow. It only demonstrates the makings of a champion.";
 
+  const supabase = await createClient();
   let { data: stories_titles } = await supabase
     .from("stories_titles")
     .select(
       "story_id, title, genres, premise, misc, latest_draft, type, stage",
     );
+  // const stories_titles = cache(async () => {
+  // return stories_titles;
+  // });
 
   return (
     <div className="w-full">

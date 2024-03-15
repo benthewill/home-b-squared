@@ -1,14 +1,39 @@
-export const runtime = "edge";
+// "use server";
+
+// export const dynamic = "force-dynamic"; // not sure if required
+// export const runtime = "edge"; // not sure if required
 
 import StorySlides from "@/components/stories/StorySlides";
-import { createClient } from "@/utils/client";
+import { createClient } from "@/utils/server";
 import { parseForTexts, parseForSlides } from "@/utils/parse-points";
 import GenreChips from "@/components/GenreChips";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
+import { cache } from "react";
 
-const supabase = createClient();
+// export async function generateMetadata({ params }) {
+//   const stories_presentation_points = cache(async () => {
+//     const supabase = await createClient();
+//     let { data, error } = await supabase
+//       .from("stories_presentation_points")
+//       .select(
+//         "line_number, indent_level, content, stories_titles(title, premise, genres, misc, latest_draft)",
+//       )
+//       // Filters
+//       .eq("story_id", params.slide);
+//     return data;
+//   });
 
-export async function generateMetadata({ params }) {
+//   const storyMetadata = stories_presentation_points[0]?.stories_titles;
+
+//   const storyTitle = storyMetadata.title;
+//   return {
+//     title: storyTitle,
+//     description: "Portfolio for Ben's stories",
+//   };
+// }
+
+export default async function Page({ params }) {
+  const supabase = await createClient();
   let { data: stories_presentation_points, error } = await supabase
     .from("stories_presentation_points")
     .select(
@@ -16,24 +41,9 @@ export async function generateMetadata({ params }) {
     )
     // Filters
     .eq("story_id", params.slide);
-
-  const storyMetadata = stories_presentation_points[0]?.stories_titles;
-
-  const storyTitle = storyMetadata.title;
-  return {
-    title: storyTitle,
-    description: "Portfolio for Ben's stories",
-  };
-}
-
-export default async function Page({ params }) {
-  let { data: stories_presentation_points, error } = await supabase
-    .from("stories_presentation_points")
-    .select(
-      "line_number, indent_level, content, stories_titles(created_at, title, premise, genres, misc, latest_draft, type, stage)",
-    )
-    // Filters
-    .eq("story_id", params.slide);
+  // const stories_presentation_points = cache(async () => {
+  //   return data;
+  // });
 
   const storyMetadata = stories_presentation_points[0]?.stories_titles;
 
